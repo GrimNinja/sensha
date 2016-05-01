@@ -1,0 +1,36 @@
+{
+
+  luxe:{
+    window: {
+      width:960,
+      height:640,
+      title:'sensha',
+      fullscreen:false,
+      resizable:true,
+      borderless:false
+    }
+  },
+
+  project : {
+    name : 'Sensha',
+    version : '1.0.0',
+    author : 'GrimNinja',
+
+    app : {
+      name : 'Sensha',
+      package : 'com.grimninja.sensha'
+    },
+
+    build : {
+      dependencies : {
+        luxe : '*',
+      }
+    },
+
+    files : {
+      assets : 'assets/'
+    }
+
+  }
+
+}
