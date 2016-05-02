@@ -11,7 +11,14 @@ class Movement extends Component {
     pos.x += this.vel.x * dt;
     pos.y += this.vel.y * dt;
 
-    if (vel.lengthsq == 0 || Vector.Subtract(pos, target).length < vel.length * dt) {
+    if (pos.x < 0 ||
+        pos.y < 0 ||
+        pos.x > 1500 ||
+        pos.y > 1500
+      ) {
+
+    //}
+    //if (vel.lengthsq == 0 || Vector.Subtract(pos, target).length < vel.length * dt) {
       entity.events.fire('hit');
     }
   }

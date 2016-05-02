@@ -25,6 +25,11 @@ class Collider extends Component {
 		shape = _options.shape;
 	}
 
+  override public function onadded() {
+    this.shape.x = entity.pos.x;
+		this.shape.y = entity.pos.y;
+  }
+
   override public function update(dt: Float) {
 		this.shape.x = entity.pos.x;
 		this.shape.y = entity.pos.y;

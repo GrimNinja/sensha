@@ -8,6 +8,8 @@ import luxe.collision.shapes.*;
 import components.*;
 import components.controls.*;
 
+import states.PlayState;
+
 enum TankControl {
   AI;
   LOCAL;
@@ -29,7 +31,7 @@ class Tank extends Entity {
   public var movement: BasicMove;
   public var controls: Controls;
 
-  public var color:Color;
+  public var color: Color;
 
   public function new(options:TankOptions) {
     super({
@@ -65,7 +67,7 @@ class Tank extends Entity {
     this.add(movement);
 
     this.events.listen('hit', function(e) {
-      Luxe.camera.shake(10);
+      PlayState.map_camera.shake(10);
       //this.remove('movement');
       //this.remove('controls');
       //this.remove('collider');
@@ -97,7 +99,8 @@ class Tank extends Entity {
       h : SIZE,
       depth: 5,
       color : this.color,
-      origin : new Vector(SIZE / 2, SIZE / 2)
+      origin : new Vector(SIZE / 2, SIZE / 2),
+      batcher: PlayState.map_batcher
     });
   }
 

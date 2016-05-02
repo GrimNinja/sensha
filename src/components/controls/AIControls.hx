@@ -16,8 +16,8 @@ class AIControls extends Controls {
   }
 
   private function setTargets(e:Dynamic) {
-    moveTarget = new Vector(Math.random() * Main.w, Math.random() * Main.h);
-    shootTarget = new Vector(Math.random() * Main.w, Math.random() * Main.h);
+    moveTarget = new Vector(Math.random() * 1400 + 50, Math.random() * 1400 + 50);
+    shootTarget = new Vector(Math.random() * 1400 + 50, Math.random() * 1400 + 50);
     ready = true;
   }
 }

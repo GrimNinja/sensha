@@ -5,13 +5,15 @@ import luxe.Entity;
 import luxe.Vector;
 import luxe.collision.shapes.*;
 
+import phoenix.Batcher;
+
 import components.*;
 import entities.*;
 import states.PlayState;
 
 class Bullet extends Entity {
   public static inline var RADIUS:Float = 10;
-  public static inline var SPEED:Float = 750;
+  public static inline var SPEED:Float = 1000;
 
   public var collider: Collider;
   public var movement: Movement;
@@ -37,16 +39,19 @@ class Bullet extends Entity {
     this.events.listen('hit', function(e) {
       this.active = false;
       this.remove('movement');
+      this.remove('collider');
       PlayState.bullet_pool.put(this);
 		});
   }
 
   public function reinit(tank:Tank) {
+    var shootDir:Vector = Vector.Subtract(tank.get('controls').shootTarget, tank.pos).normalize();
     this.collider.ignore = cast tank;
-    this.pos = tank.pos.clone();
+    this.pos = Vector.Add(tank.pos, Vector.Multiply(shootDir, 50));
     this.movement.target = tank.get('controls').shootTarget.clone();
-    this.movement.vel = Vector.Subtract(tank.get('controls').shootTarget, this.pos).normalize().multiplyScalar(SPEED);
+    this.movement.vel = shootDir.multiplyScalar(SPEED);
     this.add(movement);
+    this.add(collider);
     this.active = true;
   }
 
@@ -58,7 +63,8 @@ class Bullet extends Entity {
         y : this.pos.y,
         r : RADIUS,
         depth: 3,
-        color : new Color(1,1,0,1)
+        color : new Color(1,1,0,1),
+        batcher: PlayState.map_batcher
       });
     }
   }
